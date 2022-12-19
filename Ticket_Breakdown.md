@@ -22,14 +22,14 @@ Goal of the impovement is to extend Agent's metadata with one more property, `ag
 0. Collect missing validation requirement for agent external UI (min/max length/etc)
 
 1. Add new property to the DB
-1.a Declare a new property on the Agent table, non-null and unique. 
-1.b Add migration script if needed to run the DDL to actually add it to the live table. Back-populate it with DB ID as a default.
+  - Declare a new property on the Agent table, non-null and unique. 
+  - Add migration script if needed to run the DDL to actually add it to the live table. Back-populate it with DB ID as a default.
 Time: 0.5 points.
 
-2. Extend the API to add agentExtenalId to the data returned by `getShiftsByFacility`. Add a test that it being returned after being set by the test. Add a passing and failing validation test. Regenerate client proxies if needed/API docs.
+2. Extend the API to add `agentExtenalId` to the data returned by `getShiftsByFacility`. Add a test that it is returned after being set by the test. Add a passing and failing validation test. Regenerate client proxies if needed/API docs.
 Time: 0.5 points
 
-3. Update `generateReport` to show `agentExtenalId` instead of `agentDbId`. Add a test that it is included in the report.
+3. Update `generateReport` to show `agentExtenalId` instead of `agentDbId`. Add a test that it is shown in the report.
 Time: 0.5 points
 
 4. Add editing UI to enable corresponding roles to change `agentExtenalId` via UI. Add a UI test covering the editing scenario. 
