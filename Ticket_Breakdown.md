@@ -16,3 +16,22 @@ Based on the information given, break this ticket down into 2-5 individual ticke
 You will be graded on the level of detail in each ticket, the clarity of the execution plan within and between tickets, and the intelligibility of your language. You don't need to be a native English speaker, but please proof-read your work.
 
 ## Your Breakdown Here
+
+Goal of the impovement is to extend Agent's metadata with one more property, `agentExtenalId` and wire it though the system.
+
+0. Collect missing validation requirement for agent external UI (min/max length/etc)
+
+1. Add new property to the DB
+1.a Declare a new property on the Agent table, non-null and unique. 
+1.b Add migration script if needed to run the DDL to actually add it to the live table. Back-populate it with DB ID as a default.
+Time: 0.5 points.
+
+2. Extend the API to add agentExtenalId to the data returned by `getShiftsByFacility`. Add a test that it being returned after being set by the test. Add a passing and failing validation test. Regenerate client proxies if needed/API docs.
+Time: 0.5 points
+
+3. Update `generateReport` to show `agentExtenalId` instead of `agentDbId`. Add a test that it is included in the report.
+Time: 0.5 points
+
+4. Add editing UI to enable corresponding roles to change `agentExtenalId` via UI. Add a UI test covering the editing scenario. 
+Time: 1 point.
+
