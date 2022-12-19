@@ -8,8 +8,12 @@ exports.deterministicPartitionKey = (event) => {
   // the key is either partitionKey property, or event hash or fallback default 
   // below are the functional-style methods providing basic primitives
 
+  const hash = (s) => {
+    return crypto.createHash("sha3-512").update(s).digest("hex")
+  }
+
   const limit = (s) => {
-    return s?.length > MAX_PARTITION_KEY_LENGTH ? crypto.createHash("sha3-512").update(s).digest("hex") : s
+    return s?.length > MAX_PARTITION_KEY_LENGTH ? hash(s): s
   }
   const str = (o) => {
     return typeof o === "string" ? o : JSON.stringify(o)
@@ -20,7 +24,7 @@ exports.deterministicPartitionKey = (event) => {
     return str(e?.partitionKey)
   }
   const getKeyFromObject = (data) => {
-    return data ? crypto.createHash("sha3-512").update(str(data)).digest("hex") : null
+    return data ? hash(str(data)) : null
   }
 
   // combine lookups together
